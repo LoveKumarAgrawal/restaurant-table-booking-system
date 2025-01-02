@@ -27,7 +27,6 @@ const BookingForm = () => {
     const date = watch('date');
     if (date) {
       const response = await fetch(`http://localhost:5000/api/availability?date=${date}`);
-      console.log(response)
       const data = await response.json();
       setAvailableSlots(data);
     }
@@ -47,7 +46,6 @@ const BookingForm = () => {
 
     if (response.ok) {
       alert('Booking created successfully');
-      // Reset states
       setAvailableSlots([]);
       setSelectedTime(null);
       setShowBookingDetails(false);
@@ -58,87 +56,89 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Book a Table</h2>
+    <div className="max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg space-y-8">
+      <h2 className="text-4xl font-semibold text-center text-gray-800">Book a Table</h2>
       
       {/* Date and Time Selection Form */}
-      <form className="space-y-4">
-        <div>
-          <label className="block mb-1">Date</label>
+      <form className="space-y-8">
+        <div className="space-y-3">
+          <label className="block text-xl font-medium text-gray-700">Date</label>
           <input
             type="date"
             {...register('date')}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
-          {errors.date && <p className="text-red-500">{errors.date.message}</p>}
+          {errors.date && <p className="text-red-500 text-sm">{errors.date.message}</p>}
         </div>
 
         <button 
           type="button" 
           onClick={handleDateSubmit} 
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="w-full bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         >
           Get Available Slots
         </button>
 
+        {/* Available Slots */}
         {availableSlots.length > 0 && (
           <div>
-            <h3 className="text-lg font-semibold mt-4">Available Time Slots:</h3>
-            <ul className="space-y-2">
+            <h3 className="text-2xl font-semibold text-gray-800 mt-8">Available Time Slots:</h3>
+            <div className="mt-6 flex flex-wrap gap-4 justify-center">
               {availableSlots.map((slot) => (
-                <li key={slot} className="flex items-center">
-                  <button 
-                    type="button" 
-                    onClick={() => handleTimeSelect(slot)} 
-                    className="w-full text-left p-2 border border-gray-300 rounded hover:bg-gray-100"
-                  >
-                    {slot}
-                  </button>
-                </li>
+                <button 
+                  key={slot}
+                  type="button" 
+                  onClick={() => handleTimeSelect(slot)} 
+                  className={`w-20 h-20 rounded-full flex items-center justify-center text-lg font-semibold text-gray-700 border-2 
+                    ${selectedTime === slot ? 'bg-blue-600 text-white border-blue-600' : 'bg-gray-100 border-gray-300 hover:bg-blue-100' } 
+                    focus:outline-none focus:ring-2 focus:ring-blue-500 transition`}
+                >
+                  {slot}
+                </button>
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </form>
 
       {/* Guest Details Form */}
       {showBookingDetails && (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
-          <h3 className="text-lg font-semibold">Enter Your Details</h3>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          <h3 className="text-2xl font-semibold text-gray-800">Enter Your Details</h3>
 
           <input type="hidden" {...register('time')} value={selectedTime || ''} />
           
-          <div>
-            <label className="block mb-1">Number of Guests</label>
+          <div className="space-y-3">
+            <label className="block text-xl font-medium text-gray-700">Number of Guests</label>
             <input
               type="number"
               {...register('guests', { valueAsNumber: true })}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
-            {errors.guests && <p className="text-red-500">{errors.guests.message}</p>}
+            {errors.guests && <p className="text-red-500 text-sm">{errors.guests.message}</p>}
           </div>
 
-          <div>
-            <label className="block mb-1">Name</label>
+          <div className="space-y-3">
+            <label className="block text-xl font-medium text-gray-700">Name</label>
             <input
               type="text"
               {...register('name')}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
-            {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+            {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
           </div>
 
-          <div>
-            <label className="block mb-1">Contact Email</label>
+          <div className="space-y-3">
+            <label className="block text-xl font-medium text-gray-700">Contact Email</label>
             <input
               type="email"
               {...register('contact')}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
-            {errors.contact && <p className="text-red-500">{errors.contact.message}</p>}
+            {errors.contact && <p className="text-red-500 text-sm">{errors.contact.message}</p>}
           </div>
 
-          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+          <button type="submit" className="w-full bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
             Confirm Booking
           </button>
         </form>
