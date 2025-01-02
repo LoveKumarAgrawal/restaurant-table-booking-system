@@ -1,28 +1,18 @@
-
-import express, { Request, Response } from "express";
-import cors from "cors"
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors())
-
-interface Booking {
-  id: string;
-  date: string;
-  time: string;
-  guests: number;
-  name: string;
-  contact: string;
-}
+app.use(cors());
 
 // Sample data for available time slots
 const allSlots = ["12:00", "14:00", "16:00", "18:00", "20:00"]; // Example slots
 
 // In-memory bookings storage
-let bookings: Booking[] = [];
+let bookings = [];
 
-app.get("/", (req: Request, res: Response) => {
-  res.json("hello")
+app.get('/', (req, res) => {
+    res.json("hello")
 })
 
 /**
@@ -30,12 +20,12 @@ app.get("/", (req: Request, res: Response) => {
  * Method: GET
  * Query Params: date
  */
-app.get("/api/availability", (req: Request, res: Response) => {
+app.get("/api/availability", (req, res) => {
   const { date } = req.query;
 
   if (!date || typeof date !== "string") {
     res.status(400).json({ message: "Date is required" });
-    return
+    return;
   }
 
   // Find booked slots for the given date
@@ -54,13 +44,13 @@ app.get("/api/availability", (req: Request, res: Response) => {
  * Method: POST
  * Body: { date, time, guests, name, contact }
  */
-app.post("/api/bookings", (req: Request, res: Response) => {
+app.post("/api/bookings", (req, res) => {
   const { date, time, guests, name, contact } = req.body;
 
   // Validate fields
   if (!date || !time || !guests || !name || !contact) {
     res.status(400).json({ message: "All fields are required" });
-    return
+    return;
   }
 
   // Prevent double booking for the same slot
@@ -69,11 +59,11 @@ app.post("/api/bookings", (req: Request, res: Response) => {
   );
   if (isAlreadyBooked) {
     res.status(400).json({ message: "Time slot already booked" });
-    return
+    return;
   }
 
   // Create a new booking
-  const newBooking: Booking = {
+  const newBooking = {
     id: `${bookings.length + 1}`,
     date,
     time,
