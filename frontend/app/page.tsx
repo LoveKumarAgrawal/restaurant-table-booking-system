@@ -98,21 +98,21 @@ export default function Home() {
             {/* Testimonial 1 */}
             <div className="w-full sm:w-1/3 p-6 bg-gray-50 shadow-lg rounded-lg">
               <p className="text-lg text-gray-600">
-                "Booking a table has never been easier! I loved the real-time availability, and the process was so fast."
+              &quot;Booking a table has never been easier! I loved the real-time availability, and the process was so fast.&quot;
               </p>
               <p className="mt-4 font-semibold text-gray-800">John Doe</p>
             </div>
             {/* Testimonial 2 */}
             <div className="w-full sm:w-1/3 p-6 bg-gray-50 shadow-lg rounded-lg">
               <p className="text-lg text-gray-600">
-                "As a restaurant owner, this system made managing reservations so much simpler. Highly recommended!"
+              &quot;As a restaurant owner, this system made managing reservations so much simpler. Highly recommended!&quot;
               </p>
               <p className="mt-4 font-semibold text-gray-800">Jane Smith</p>
             </div>
             {/* Testimonial 3 */}
             <div className="w-full sm:w-1/3 p-6 bg-gray-50 shadow-lg rounded-lg">
               <p className="text-lg text-gray-600">
-                "I was able to book a table for my family within seconds. So user-friendly and efficient!"
+              &quot;I was able to book a table for my family within seconds. So user-friendly and efficient!&quot;
               </p>
               <p className="mt-4 font-semibold text-gray-800">Mark Lee</p>
             </div>
