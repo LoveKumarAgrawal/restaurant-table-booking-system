@@ -76,6 +76,15 @@ app.post("/api/bookings", (req, res) => {
   res.status(201).json({ message: "Booking created successfully", booking: newBooking });
 });
 
+
+/**
+ * Endpoint: Return all the bookings made by the user
+ * Method: GET
+ */
+app.get('/api/bookings', (req, res) => {
+  res.json({bookings})
+})
+
 // Start the server
 const PORT = 5000;
 app.listen(PORT, () => {
