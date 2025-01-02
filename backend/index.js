@@ -85,6 +85,29 @@ app.get('/api/bookings', (req, res) => {
   res.json({bookings})
 })
 
+
+/**
+ * Endpoint: Delete a booking
+ * Method: DELETE
+ * Params: id (booking id to be deleted)
+ */
+app.delete('/api/bookings/:id', (req, res) => {
+  const { id } = req.params;
+
+  // Find the index of the booking with the given id
+  const bookingIndex = bookings.findIndex((booking) => booking.id === id);
+
+  if (bookingIndex === -1) {
+    return res.status(404).json({ message: "Booking not found" });
+  }
+
+  // Remove the booking from the array
+  bookings.splice(bookingIndex, 1);
+
+  res.status(200).json({ message: "Booking deleted successfully" });
+});
+
+
 // Start the server
 const PORT = 5000;
 app.listen(PORT, () => {

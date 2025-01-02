@@ -21,13 +21,19 @@ export default function Home() {
           <p className="text-xl sm:text-2xl max-w-3xl mx-auto">
             A seamless and modern way to book your next table. Manage bookings effortlessly and provide your guests with an outstanding dining experience.
           </p>
-          <div className="mt-8 flex justify-center">
-            {/* Book Table Button */}
+          <div className="mt-8 flex justify-center gap-3">
+            {/* Book Table and View Bookings Button */}
             <button
-              onClick={handleBookTable}  // Trigger router.push when clicked
+              onClick={handleBookTable}
               className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-lg text-lg font-semibold transition-all duration-300"
             >
               Book Table
+            </button>
+            <button
+              onClick={() => router.push("/userbookings")}
+              className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-lg text-lg font-semibold transition-all duration-300"
+            >
+              View Bookings
             </button>
           </div>
         </div>
