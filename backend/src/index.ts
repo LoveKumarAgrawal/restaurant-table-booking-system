@@ -21,6 +21,10 @@ const allSlots = ["12:00", "14:00", "16:00", "18:00", "20:00"]; // Example slots
 // In-memory bookings storage
 let bookings: Booking[] = [];
 
+app.get("/", (req: Request, res: Response) => {
+  res.json("hello")
+})
+
 /**
  * Endpoint: Get available time slots for a specific date
  * Method: GET
