@@ -29,7 +29,7 @@ const BookingForm = () => {
   const handleDateSubmit = async () => {
     const date = watch('date');
     if (date) {
-      const response = await fetch(`https://restaurant-table-booking-system-backend-14j1.vercel.app/api/availability?date=${date}`);
+      const response = await fetch(`https://restaurant-table-booking-system-pi.vercel.app/api/availability?date=${date}`);
       const data = await response.json();
       setAvailableSlots(data);
     }
@@ -41,7 +41,7 @@ const BookingForm = () => {
   };
 
   const onSubmit = async (data: BookingFormInputs) => {
-    const response = await fetch('https://restaurant-table-booking-system-backend-14j1.vercel.app/api/bookings', {
+    const response = await fetch('https://restaurant-table-booking-system-pi.vercel.app/api/bookings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data, time: selectedTime }),
